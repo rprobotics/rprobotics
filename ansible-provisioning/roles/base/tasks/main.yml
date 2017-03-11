@@ -11,3 +11,8 @@
     - chef
     - lynx
     - thunderbird
+    - duplicity
+    - vagrant
+    - packer
+    - virtualbox
+    - virtualbox-guest-additions-iso
