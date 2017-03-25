@@ -1,0 +1,6 @@
+{'endCity': 'san+francisco', 'endStreet': '100+spear+st', 'distance': 4392, 'startCity': 'Santa+Rosa', 'endState': 'CA', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
+{'endCity': 'san+francisco', 'endStreet': '1+embarcadero', 'distance': 4262, 'startCity': 'Santa+Rosa', 'endState': 'CA', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
+{'endCity': 'el+cerrito', 'endStreet': '11565+San+Pablo+Ave', 'distance': 3402, 'startCity': 'Santa+Rosa', 'endState': 'CA', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
+{'endCity': 'Santa+Rosa', 'endStreet': '1670+Mendocino+Ave', 'distance': 583, 'startCity': 'Santa+Rosa', 'endState': 'CA', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
+{'endCity': 'Reno', 'endStreet': '1855+E+Peckham', 'distance': 13771, 'startCity': 'Santa+Rosa', 'endState': 'NV', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
+{'endCity': 'Somerville', 'endStreet': '180+Somerville+Ave', 'distance': 161438, 'startCity': 'Santa+Rosa', 'endState': 'MA', 'startState': 'CA', 'startStreet': '2525+Gardner+Ave'}
