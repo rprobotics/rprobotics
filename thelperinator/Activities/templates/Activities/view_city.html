@@ -1,0 +1,43 @@
+<h1>Select your starting point for: {{ city }}</h1>
+
+{% for city in viewCity.results %}
+    {{ city }}
+    <br />
+{{ city.name }}<br/>
+{{ city.types}}
+<br/>
+<br/>
+<br />
+
+{% endfor %}
+
+
+<form action={% url 'activity:viewMap'   %} method="post">
+    {% csrf_token %}
+    <input type="hidden" name="city_name" value={{ city }} />
+    
+    {% for city in viewCity.results %}
+    <br/>
+    <input type="checkbox" name="activityChoice", id={{ city.id }}, value="{{ city.name }}" /><img src="{{ city.icon }}" />{{ city.name }}
+    <input type="radio" name="startingPoint", id="startingPoint", value="{{ city.name }}"/>Start here?<br/><br/>
+    {% endfor %}
+   
+<input type="submit" />
+
+</form>
+
+
+
+
+{% for city in viewCity %}
+<br/><br/>
+
+{{ city.name }}<br/>
+<img src="{{ city.image_url }}" />
+<br/>
+{{ city.location }}
+{{ city.id }}
+
+<br/><br/><br/>
+
+{% endfor %}

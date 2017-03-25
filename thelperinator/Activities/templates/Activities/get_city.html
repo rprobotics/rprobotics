@@ -1,0 +1,17 @@
+<h4>Current Time: {% now "F Y H:i" %}</h4>
+<h1>Enter Starting City</h1>
+
+<form action={% url 'activity:query' query  %} method="post">
+    {% csrf_token %}
+    <input type="text" name="city", id="city" value="san_francisco" /> <br/>
+    <input type="radio" name="activity" value="bar" /> Bars<br/>
+    <input type="radio" name="activity" value="restaurants" /> Restaurants<br/>
+    <input type="radio" name="activity" value="hotel" /> Hotel<br/>
+    <input type="radio" name="activity" value="shopping" /> Shopping<br/>
+    <input type="radio" name="activity" value="activity_life" />Active Life<br/>
+    <input type="radio" name="activity" value="library" />Library<br/>    
+    <input type="submit" value="Submit" />
+    
+    
+</form>
+{{ city }}
