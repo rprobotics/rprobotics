@@ -1,6 +1,10 @@
 <h4>Current Time: {% now "F Y H:i" %}</h4>
 <h1>Enter Starting City</h1>
 
+{% for i in viewCity %}
+{{ i }}
+{% endfor %}
+
 <form action={% url 'activity:query' query  %} method="post">
     {% csrf_token %}
     <input type="text" name="city", id="city" value="san_francisco" /> <br/>

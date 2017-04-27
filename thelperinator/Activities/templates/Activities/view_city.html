@@ -1,15 +1,15 @@
 <h1>Select your starting point for: {{ city }}</h1>
 
-{% for city in viewCity.results %}
-    {{ city }}
-    <br />
-{{ city.name }}<br/>
-{{ city.types}}
-<br/>
-<br/>
-<br />
+<!--{% for city in viewCity.results %}-->
+<!--    {{ city }}-->
+<!--    <br />-->
+<!--{{ city.name }}<br/>-->
+<!--{{ city.types}}-->
+<!--<br/>-->
+<!--<br/>-->
+<!--<br />-->
 
-{% endfor %}
+<!--{% endfor %}-->
 
 
 <form action={% url 'activity:viewMap'   %} method="post">
@@ -26,18 +26,3 @@
 
 </form>
 
-
-
-
-{% for city in viewCity %}
-<br/><br/>
-
-{{ city.name }}<br/>
-<img src="{{ city.image_url }}" />
-<br/>
-{{ city.location }}
-{{ city.id }}
-
-<br/><br/><br/>
-
-{% endfor %}

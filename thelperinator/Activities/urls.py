@@ -1,10 +1,10 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 
 
 from Activities import views
 
 
-urlpatterns = patterns('',
+urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^(?P<city>([\w_]*|\d*))/$', views.queryCity, name='query'),
     
@@ -14,7 +14,7 @@ urlpatterns = patterns('',
     url(r'^/(?P<city>([\w_ ]*|\d*))/view/(?P<activity>([A-Za-z_]*))/$', views.viewCity, name='viewCity'),
 
     
-    url(r'^/map/$', views.viewMap, name='viewMap'),
+    url(r'^/map/$', views.viewMap, name='viewMap')
 
 
-)
+]

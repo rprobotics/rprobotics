@@ -6,8 +6,7 @@ from django.shortcuts import get_object_or_404
 from Activities.models import ActivityType
 from Maps.controllers import *
 from .forms import *
-from .productionyelp import *
-from .api import query_api
+
 from .controllers import *
 
 
@@ -44,10 +43,28 @@ def map(request):
 
 # Create your views here.
 def index(request):
-    #print request.session.get('activity') 
-    return render(request, "Activities/get_city.html")
-   # return HttpResponse("hello activity world")
+    context = {}    
+    if request.method == "POST":
+        form = StartingPointForm(request.POST)
+        home_loc = request.POST['home_loc'].strip("/")
+        if form.is_valid():
+            home_loc = request.POST.get('home_loc')
+            context['home_loc'] = home_loc      
+            request.session['home_loc'] = home_loc
+            return render(request, "Activities/get_city.html", context)
+    return HttpResponseRedirect("/")
  
+  
+def queryCity(request, city):
+    if request.method == "POST":
+        form = CityForm(request.POST)
+        city_name = request.POST['city'].strip("/")
+        activity = request.POST['activity']
+        if form.is_valid():
+            return HttpResponseRedirect("{0}/view/{1}".format(city_name, activity))
+    else:
+        form = CityForm()
+    return render(request, "Activities/get_city.1.html", {'form': form})
  
  
  
@@ -61,7 +78,7 @@ def viewMap(request):
     l=0
     selectedList = []
     fullList = request.session.get('cityResults')
-    #print "fullList: {0}".format(fullList[6])
+    print "fullList: {0}".format(fullList)
     for i in fullList:
         if i['name'] in test or i['name'] == startingPoint:
             selectedList.append(i)
@@ -79,34 +96,18 @@ def viewMap(request):
  
  # refactor cityResults to cityActivities; it more accurately describes the results
 def viewCity(request, city, activity):
-    import json
-    request.session['activity'] = activity
     apikey="AIzaSyASwjacwj6WmBZ5NT3Tq_lGvb9MxizfUsU"
+    
     coords=json.load(urllib2.urlopen("https://maps.googleapis.com/maps/api/geocode/json?address=San+Francisco,+CA&key=AIzaSyASwjacwj6WmBZ5NT3Tq_lGvb9MxizfUsU"))
     baseLoc=coords['results'][0]['geometry']['location']
     longitude=baseLoc['lng']
     latitude=baseLoc['lat']
     
     cityResults=json.load(urllib.urlopen("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={0},{1}&radius=5000&type={2}&key={3}".format(latitude,longitude, activity,apikey)))
-    print(cityResults)
-    #cityResults = query_api(activity, city)
-    #print "cityResults: {0}".format(cityResults)
+    
+    request.session['activity'] = activity  
     context = {"viewCity": cityResults, 'city': city}
-    #context = {"viewCity": coords, 'city': city}
-    #request.session['cityResults'] = cityResults
-
+    request.session.put(cityResults)
+    print(cityResults)
     return render(request, "Activities/view_city.html", context)
- 
-def queryCity(request, city):
-    if request.method == "POST":
-        form = CityForm(request.POST)
-#        print "CityForm: {0}".format(form)
-        city_name = request.POST['city'].strip("/")
-#        print "city_name: {0}".format(city_name)
-        activity = request.POST['activity']
-        if form.is_valid():
-            return HttpResponseRedirect("{0}/view/{1}".format(city_name, activity))
-#            return HttpResponseRedirect(city_name+"/view/"+activity)
-    else:
-        form = CityForm()
-    return render(request, "Activities/get_city.1.html", {'form': form})
+
