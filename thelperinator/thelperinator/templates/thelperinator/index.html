@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>TravelHelperinator!!</title>
+    </head>
+    <body>
+            Perry The Platypus!?!
+            <br/><br/>
+            <br/><br/>
+            
+            <form action="activity/" method="post">
+                {% csrf_token %}
+                <!-- Split this form into multiple fields for the address (street, city, zip, state) -->
+                <label for="home_loc">Home Location:</label>
+                <input type="text" id="home_loc" name="home_loc" value="11450 San Pablo Ave, El Cerrito, CA 94530"/><br/>
+                <input type="submit" value="Submit Meh" />
+            </form>
+            
+            
+    </body>
+</html>
