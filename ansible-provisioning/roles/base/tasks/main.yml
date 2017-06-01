@@ -5,7 +5,7 @@
 - name: install packages
   apt:
     name: "{{ item }}"
-    state: latest
+   state: latest
   with_items:
     - nmap
     - chef
@@ -16,3 +16,24 @@
     - packer
     - virtualbox
     - virtualbox-guest-additions-iso
+
+- name: clone pyenv
+  git:
+    clone: yes
+    depth: 1
+    dest: "{{ home_path }}/pyenv"
+    repo: https://github.com/pyenv/pyenv.git
+    update: yes
+    
+- name: add to bashrc
+  lineinfile:
+    backup: yes
+    create: yes
+    path: "{{ home_path }}/bashrc"
+    line: "{{ item }}"
+    mode: 0544
+    state: present
+  with_items:
+    - export PYENV_ROOT="$HOME/.pyenv"
+    - export PATH="$PYENV_ROOT/bin:$PATH"
+    - eval "$(pyenv init -)"
