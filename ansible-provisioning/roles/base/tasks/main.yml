@@ -5,7 +5,7 @@
 - name: install packages
   apt:
     name: "{{ item }}"
-   state: latest
+    state: latest
   with_items:
     - nmap
     - lynx
