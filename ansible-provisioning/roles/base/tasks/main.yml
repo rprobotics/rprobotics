@@ -8,10 +8,8 @@
    state: latest
   with_items:
     - nmap
-    - chef
     - lynx
     - thunderbird
-    - duplicity
     - vagrant
     - packer
     - virtualbox
