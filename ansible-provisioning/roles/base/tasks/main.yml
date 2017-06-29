@@ -1,27 +1,22 @@
 ---
 
 
-
-- name: install packages
-  apt:
-    name: "{{ item }}"
-   state: latest
-  with_items:
-    - nmap
-    - chef
-    - lynx
-    - thunderbird
-    - duplicity
-    - vagrant
-    - packer
-    - virtualbox
-    - virtualbox-guest-additions-iso
+#- name: install packages
+#  apt:
+#    name: "{{ item }}"
+#    state: latest
+#  with_items:
+#    - nmap
+#    - lynx
+#    - thunderbird
+#    - vagrant
+#    - packer
 
 - name: clone pyenv
   git:
     clone: yes
     depth: 1
-    dest: "{{ home_path }}/pyenv"
+    dest: "{{ home_path }}/.pyenv"
     repo: https://github.com/pyenv/pyenv.git
     update: yes
     
@@ -29,9 +24,9 @@
   lineinfile:
     backup: yes
     create: yes
-    path: "{{ home_path }}/bashrc"
+    path: "{{ home_path }}/.bashrc"
     line: "{{ item }}"
-    mode: 0544
+    mode: 0700
     state: present
   with_items:
     - export PYENV_ROOT="$HOME/.pyenv"
