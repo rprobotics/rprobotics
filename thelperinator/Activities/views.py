@@ -43,6 +43,7 @@ def map(request):
 
 # Create your views here.
 def index(request):
+    return render(request, "Activities/index.html")
     context = {}    
     if request.method == "POST":
         form = StartingPointForm(request.POST)
@@ -52,7 +53,7 @@ def index(request):
             context['home_loc'] = home_loc      
             request.session['home_loc'] = home_loc
             return render(request, "Activities/get_city.html", context)
-    return HttpResponseRedirect("/")
+    #return HttpResponseRedirect("/")
  
   
 def queryCity(request, city):
