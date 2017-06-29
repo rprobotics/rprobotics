@@ -1,7 +1,6 @@
 ---
 
 
-
 - name: install packages
   apt:
     name: "{{ item }}"
@@ -19,7 +18,7 @@
   git:
     clone: yes
     depth: 1
-    dest: "{{ home_path }}/pyenv"
+    dest: "{{ home_path }}/.pyenv"
     repo: https://github.com/pyenv/pyenv.git
     update: yes
     
@@ -27,7 +26,7 @@
   lineinfile:
     backup: yes
     create: yes
-    path: "{{ home_path }}/bashrc"
+    path: "{{ home_path }}/.bashrc"
     line: "{{ item }}"
     mode: 0544
     state: present
