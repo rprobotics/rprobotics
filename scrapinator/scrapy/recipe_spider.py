@@ -6,7 +6,8 @@ import os
 
 class RecipeSpider(scrapy.Spider):
     name = 'recipespider'
-    start_urls = ['http://allrecipes.com/recipe/245119/biscuits-and-gravy-casserole/?internalSource=popular&referringContentType=home%20page&clickId=cardslot%2020']
+    start_urls = ['http://allrecipes.com/recipe/245119/biscuits-and-gravy-casserole/?internalSource=popular&referringContentType=home%20page&clickId=cardslot%2020', \
+    'http://allrecipes.com/recipe/18886/beccas-barbequed-beans/']
 
     def parse(self, response):
         bsObj = BeautifulSoup(response.body_as_unicode(), "html.parser")
