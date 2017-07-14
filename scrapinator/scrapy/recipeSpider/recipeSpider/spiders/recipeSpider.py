@@ -1,12 +1,9 @@
 
 import scrapy
 import pickle
-import os
 import bz2
 
 from bs4 import BeautifulSoup
-from scrapy.selector import Selector
-from scrapy import Spider
 
 
 class RecipeSpider(scrapy.Spider):
