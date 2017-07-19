@@ -1,16 +1,22 @@
 ---
 
 
-#- name: install packages
-#  apt:
-#    name: "{{ item }}"
-#    state: latest
-#  with_items:
-#    - nmap
-#    - lynx
-#    - thunderbird
-#    - vagrant
-#    - packer
+- name: install packages
+  apt:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - nmap
+    - vim
+    - lynx
+    - sysstat
+    - thunderbird
+    - vagrant
+    - chromium-browser
+    - boinc-manager
+    - docker.io
+    - docker-compose
+    - steam
 
 - name: clone pyenv
   git:
@@ -19,7 +25,14 @@
     dest: "{{ home_path }}/.pyenv"
     repo: https://github.com/pyenv/pyenv.git
     update: yes
-    
+
+- name: update permissions on .pyen
+  file:
+    owner: "{{ owner }}"
+    group: "{{ owner }}"
+    mode: 0700
+    path: "{{ home_path }}/.pyenv"    
+
 - name: add to bashrc
   lineinfile:
     backup: yes
