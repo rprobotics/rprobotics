@@ -1,51 +1,28 @@
 #!/usr/bin/env python
 
-
-from urllib.request import urlopen
-from bs4 import BeautifulSoup
-
-
-html = urlopen("http://allrecipes.com/recipe/245119/biscuits-and-gravy-casserole/?internalSource=popular&referringContentType=home%20page&clickId=cardslot%2020")
-bsObj = BeautifulSoup(html, "html.parser")
-
-
-similarList = bsObj.findAll("a", {"data-internal-referrer-link": "ml_similar_recipe_banner"})
-#similarList = bsObj.findAll("li", {"ng-click": "setAnalyticsCookie('similar recipe')"})
+from units import unit
+import units.predefined
+import gzip
 
 
 
-ingredList = bsObj.findAll("span", {"class": "recipe-ingred_txt", \
-    "itemprop": "ingredients"
-})
+pantry_list = {'chicken': {'quantity': unit('lb')(2)},
+               'eggs': {'quantitiy': unit('count')(24)},
+               'potatoes': {'quantitiy': unit('count')(4)},
+               'celery': {'quantitiy': unit('count')(4)},
+               'tomatoes': {'quantitiy': unit('lb')(1)},
+               'bacon': {'quantitiy': unit('lb')(.5)},
+               'lettuce': {'quantitiy': unit('lb')(1.5)},
+               'ground turkey': {'quantitiy': unit('lb')(2)}
+               'noodles': {'quantitiy': unit('count')(4)},
+               'butter': {'quantitiy': unit('oz')(24)},
+               'bbq sauce': {'quantitiy': unit('')(), 'synonyms': ['barbcue sauce'] },
 
-directions = bsObj.findAll("span", {"class": "recipe-directions__list--item"})
-#directions = bsObj.findAll("li", {"class": "step"})
+               }
 
-
-#for i in similarList:
-#    print(i.get('href'))
-
-try:
-    print(similarList[0])
-except: 
-    print(bsObj.prettify())    
-
-#html = urlopen("http://allrecipes.com/recipe/245119/biscuits-and-gravy-casserole/?internalSource=popular&referringContentType=home%20page&clickId=cardslot%2020")
-"""
-html = urlopen("http://allrecipes.com/{0}".format())
-bsObj = BeautifulSoup(html, "html.parser")
+#               '': {'quantitiy': unit('')()},
+#               '': {'quantitiy': unit('')()},
 
 
-similarList = bsObj.findAll("a", {"data-internal-referrer-link": "ml_similar_recipe_banner"})
-
-
-ingredList = bsObj.findAll("span", {"class": "recipe-ingred_txt", \
-    "itemprop": "ingredients"
-})
-
-directions = bsObj.findAll("span", {"class": "recipe-directions__list--item"})
-
-
-
-
-"""
+if __name__ == '__main__':
+    units.predefined.define_units()
