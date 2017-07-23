@@ -3,3 +3,9 @@
 *.pyc
 \#*\#
 \.\#*
+.project
+.python-version
+.pydevproject
+db.sqlite3
+.idea
+
