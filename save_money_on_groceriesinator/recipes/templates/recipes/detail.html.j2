@@ -1,0 +1,21 @@
+<h1>{{  title }}</h1>
+<br/><br/>
+
+Ingredient List:
+<br/><br/>
+{% for ingred in ingredList %}
+
+    {{ ingred }}<br/>
+
+{% endfor %}
+
+
+<br/><br/><br/>
+Steps:<br/><br/>
+{% for step in directions %}
+
+    {{ step.step_num }}. {{ step.step }}<br/><br/>
+
+
+{%  endfor %}
+
