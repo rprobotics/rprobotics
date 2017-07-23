@@ -3,14 +3,13 @@
 import bz2
 import os
 import pickle
-import yaml
 import json
 
 from bs4 import BeautifulSoup
 
 # some initialization
 recipe_dir = os.getcwd() + "/../pickle_recipes"
-output_file = open("fixtures/recipes.json", "w")
+output_file = open("fixtures/recipes2.json", "w")
 json_output_array = []
 
 counter = 1
