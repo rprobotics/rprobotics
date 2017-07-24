@@ -42,6 +42,9 @@ def make_recipe():
         directions = BeautifulSoup(str(recipe_json['directions']), 'html.parser')
         ingredList = BeautifulSoup(str(recipe_json['ingredList']), 'html.parser')
 
+        title = BeautifulSoup(str(recipe_json['title']), 'html.parser')
+
+
 
         # Getting rid of the <span></span> that was brought over from the web crawling.
         directions_list = []
@@ -58,14 +61,17 @@ def make_recipe():
             #amount = re.compile('^[0-9\/ ]* {0}*'.format(measurements))
             amount = re.compile('^[0-9\/ ]* ([0-9\( ]* (ounce)\)|{0})'.format(measurements))
             #salt_and_pepper = re.compile('^(salt|pepper|black pepper)')
-            #print(amount.pattern)
+
             # regular expression used to retrieve the name of the ingredient
-            #name = re.compile('(^(ounce)\) |[a-zA-Z \(\)]*$)')
-            name = re.compile('([a-zA-Z ]*$)')
-            #name = re.compile('ounce')
+            # needs tweaking to get last ) in (optional) entries
+            name = re.compile('([a-zA-Z \(\)]*$)')
+
             ingredient = re.search(name, i_clean)
             try:
                 ingredient = ingredient.group(0).lstrip(' ')
+                #print(ingredient)
+                #if re.search('Easy Purim', title.string):
+                #    print("{0}: 1{1}".format(i_clean, ingredient))
             except:
                 pass
             # no numbers in ingred at this point, but measurements are
@@ -73,7 +79,8 @@ def make_recipe():
             for j in measurements.split('|'):
                 new_j = j.replace('(', '').replace(')', '').replace(' ', '').replace('\n', '')
                 if new_j != "":
-                    new_j = re.compile('^({0}) '.format(new_j))
+                    #new_j = re.compile('^({0}) [\]]* '.format(new_j))
+                    new_j = re.compile('(^ounce\) |{0} )'.format(new_j))
                     w = re.search(new_j, ingredient)
                     try:
                         p = len(w.group(0))
@@ -165,7 +172,7 @@ def create_random_amount(ingredient_name):
 
 if __name__=='__main__':
     units.predefined.define_units()
-    counter_limit = 5
+    counter_limit = 50
     make_recipe()
     make_pantry()
 
