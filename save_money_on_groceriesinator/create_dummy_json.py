@@ -79,7 +79,6 @@ for recipe in os.listdir(recipe_dir):
 
         try:
             ingredient_fields['amount'] = re.search(amount, i_clean).group(0).strip(' ')
-            print(ingredient_fields)
         except:
             pass
 
