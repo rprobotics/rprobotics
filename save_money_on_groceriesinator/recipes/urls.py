@@ -19,7 +19,8 @@ from recipes import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index, name='index'),    
+    url(r'^$', views.index, name='index'),
+    url(r'^pantry', views.pantry, name='pantry'),
     url(r'^(?P<recipe_id>[0-9]+)/$', views.detail, name='detail'),
     
     url(r'^(?P<recipe_id>[0-9]+)/results/$', views.results, name='results'),
