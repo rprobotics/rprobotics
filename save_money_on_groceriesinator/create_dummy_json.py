@@ -44,7 +44,6 @@ def make_recipe():
 
 
         # Getting rid of the <span></span> that was brought over from the web crawling.
-        clean_ingredList = []
         directions_list = []
 
         for i in ingredList.find_all('span'):
@@ -72,17 +71,13 @@ def make_recipe():
             # no numbers in ingred at this point, but measurements are
             # need to remove measurements from the rest of the name
             for j in measurements.split('|'):
-                #print('in measurement area')
                 new_j = j.replace('(', '').replace(')', '').replace(' ', '').replace('\n', '')
                 if new_j != "":
-                    #new_j = re.compile('^({0}|[0-9\/ ]* ([0-9\( ]* (ounce)\)|{0})) '.format(new_j))
                     new_j = re.compile('^({0}) '.format(new_j))
-                    #print(ingredient)
                     w = re.search(new_j, ingredient)
                     try:
                         p = len(w.group(0))
                         ingredient = ingredient[p:]
-                        #print(ingredient)
                     except:
                         pass
                     finally:
@@ -104,7 +99,7 @@ def make_recipe():
 
             ingredient_model = {'model': 'core.recipeingredient', 'pk': ingred_counter, 'fields': ingredient_fields}
             json_output_array.append(ingredient_model)
-            #print(ingredient_model)
+
 
         # Going to create the Recipe model, which is just the directions and title
         for count,i in enumerate(directions.find_all('span')):
