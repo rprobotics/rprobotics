@@ -22,6 +22,7 @@ class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient)
     name = models.CharField(max_length=100)
     amount = models.CharField(max_length=25)
+    unit = models.CharField(max_length=10)
 
 
 class Pantry(models.Model):
@@ -35,3 +36,5 @@ class PantryIngredient(models.Model):
     pantry = models.ForeignKey(Pantry)
     ingredient = models.ForeignKey(Ingredient)
     amount = models.CharField(max_length=25)
+    unit = models.CharField(max_length=10)
+

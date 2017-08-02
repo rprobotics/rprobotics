@@ -26,6 +26,8 @@ def make_recipe():
     recipe_dir = os.getcwd() + "/../pickle_recipes"
     output_file = open("fixtures/data.json", "w")
     json_output_array = []
+    #pinch doesn't seem to be getting picked up
+    # needs fixing
     measurements = '(ounces|cup|tablespoon|teaspoon|teaspoons|tablespoons|' \
                    'pound||pounds|ounce|cups|slice|slices|pinch|quart|quarts|divided)'
     counter = 1
@@ -70,7 +72,7 @@ def make_recipe():
             try:
                 ingredient = ingredient.group(0).lstrip(' ')
                 #print(ingredient)
-                #if re.search('Easy Purim', title.string):
+                #if re.search('Easy Mexican', title.string):
                 #    print("{0}: 1{1}".format(i_clean, ingredient))
             except:
                 pass
@@ -149,26 +151,36 @@ def make_pantry():
             pantryingredient = {}
             if i['model'] == 'core.recipeingredient':
                 ingredient_name = i['fields']['name']
-                print('{0}: {1}'.format(i['fields']['amount'], i['fields']['name']))
+                #print('{0}: {1}'.format(i['fields']['amount'], i['fields']['name']))
                 pantryingredient['pk'] = counter
                 pantryingredient['model'] = 'core.pantryingredient'
                 pantryingredient['fields'] = {}
                 pantryingredient['fields']['name'] = str(ingredient_name)
                 pantryingredient['fields']['ingredient'] = i['pk']
                 pantryingredient['fields']['pantry_id'] = 1
-                pantryingredient['fields']['amount'] = create_random_amount(ingredient_name)
+                pantryingredient['fields']['amount'] = random.randrange(1, 5)
+                #print(pantryingredient['fields']['unit'])
                 json_output_array.append(pantryingredient)
         except:
             pass
     json.dump(json_output_array, pantry_file)
     pantry_file.close()
 
+
 def create_random_amount(ingredient_name):
-    counts = ['eggs', 'garlic', 'carrot', 'celery']
-    liquids = ['sauce','ketchup', '']
-    weight = ['beef', 'steak', 'sausage', ]
-    measure = ['crumbs', 'ketchup', 'onion', 'butter']
-    return random.randrange(0,5)
+    measurements = {'count': ['eggs', 'garlic', 'carrot', 'celery'],
+                    'oz': ['sauce', 'ketchup', 'oil', 'water'],
+                    'lb': ['beef', 'steak', 'sausage', ]
+                    }
+    measure = {'oz': ['crumbs', 'ketchup', 'onion', 'butter']}
+    """
+    for key,value in enumerate(measurements):
+        for i in measurements[value]:
+            search = re.search(i, ingredient_name)
+            if search != None and search.group(0) != '':
+                return value
+    """
+    return random.randrange(1,5)
 
 if __name__=='__main__':
     units.predefined.define_units()

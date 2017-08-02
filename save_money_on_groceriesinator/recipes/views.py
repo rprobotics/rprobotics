@@ -54,6 +54,7 @@ def pantry(request):
     ingredient = Ingredient.objects.all()
     pantry = Pantry.objects.all()
     pantryingredient = PantryIngredient.objects.all()
+
     context = {'ingred': ingredient, 'pantry': pantry, 'pantryingredient': pantryingredient}
 
     print(len(pantryingredient))
