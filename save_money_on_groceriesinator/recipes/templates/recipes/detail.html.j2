@@ -1,11 +1,12 @@
+{{  recipe.title }}
 <h1>{{  title }}</h1>
 <br/><br/>
 
 Ingredient List:
 <br/><br/>
-{% for ingred in ingredList %}
+{%   for j in ingredList %}
 
-    {{ ingred }}<br/>
+    {{ j.amount }} {{ j.name }}<br/>
 
 {% endfor %}
 
